@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<h1 class="text-center display-3 p-3">Hey there! :)</h1>
+<div class="row p-2">
+    <div class="text-center col-md-12">
+        <img src="{% static 'kindpng_2193981.png' %}" width="400"  />
+    </div>
+</div>
+<div class="row p-3">
+    <div class="text-center col-md-6 offset-md-3">
+        <p>This is just a simple Python & Django project. This was developed whilst taking The "Django 3 - Full Stack Websites with Python Web Development course" by Nick Walter over on Udemy. <br><br>
+        Bootstrap 4 was used for some simple styling.<br><br>Project and blog items are populated via a SQLite 3 DB. Django comes with a pretty neat admin area that requires simple configuration to get working.</p>
+    </div>
+</div>
+<hr />
+<div class="row">
+
+{% for project in projects %}
+<div class="col-md-4">
+<h2>{{ project.title }}</h2><br>
+    <div class="py-2">{{ project.description }}</div>
+
+    <div class="w-90 p-3">
+        <img src="{{ project.image.url }}" class="img-thumbnail" width="300" />
+    </div>
+</div>
+
+    {% if forloop.counter|divisibleby:3 %}
+</div><div class="row">
+    <div class="col-md-12 p-2">
+        <hr />
+    </div>
+</div><div class="row">
+        {% endif %}
+
+{% endfor %}
+</div>
+{% endblock %}

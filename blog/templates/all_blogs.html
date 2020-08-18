@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="display-4 pt-3">Blog</h1>
+<h5 class="pb-4">(Viewing {{ blogs.count }} Article{{ blogs.count|pluralize}})</h5>
+{% for blog in blogs %}
+
+<div class="row">
+    <div class="col-md-8">
+        <h3><a href="{% url 'blog:detail' blog.slug %}" class="text-dark">{{ blog.title }}</a></h3>
+        <h6>{{ blog.datetime|date:'l jS F Y' }}</h6>
+        <p>{{ blog.body|truncatechars:500|linebreaks }}</p>
+        {% if blog.slug %}
+        <a href="{{ blog.slug }}" class="btn btn-secondary">Read the entire article</a>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <a href="{{ blog.slug }}"><img src="{{ blog.image.url }}" class="img-thumbnail" width="100%"/></a>
+    </div>
+
+</div>
+<hr class="my-3"/>
+{% endfor %}
+
+{% endblock %}
